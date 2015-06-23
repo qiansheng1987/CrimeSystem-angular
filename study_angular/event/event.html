@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html ng-app="eventModel">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>angular的事件传输机制</title>
+    <script type="text/javascript" src="../../frameWork/angular/1.3.10/angular.js"></script>
+    <script type="text/javascript" src="./eventCtrl.js"></script>
+</head>
+<body>
+    <div ng-controller="ParentCtrl">          <!--父级-->
+        <div ng-controller="SelfCtrl">        <!--自己-->
+            <a ng-click="click()">click me</a> <!--子级-->
+        </div>
+        <div ng-controller="BroCtrl">         <!--平级-->
+
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

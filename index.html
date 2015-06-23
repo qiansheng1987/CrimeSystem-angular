@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html ng-app="ezcrime">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>  @@   犯罪分析系统   @@</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+
+    <!-- 框架css引用 -->
+    <link rel="stylesheet" href="frameWork/bootstrap/3.3.4/css/bootstrap.css"/>
+    <link rel="stylesheet" href="frameWork/bootstrap/3.3.4/css/bootstrap-theme.css"/>
+    <link rel="stylesheet" href="frameWork/EzServerClient7/css/EzMap.css"/>
+    <!--日期控件-->
+    <link rel="stylesheet" href="frameWork/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css"/>
+    <!--地图样式-->
+    <!--<link rel="stylesheet" href="frameWork/EzServerClient7/css/EzMap.css"/>-->
+    <link rel="stylesheet" href="frameWork/EzServerClient7/css/MarkerCluster.css"/>
+    <link rel="stylesheet" href="frameWork/EzServerClient7/css/MarkerCluster.Default.css"/>
+
+    <link rel="stylesheet" href="frameWork/draw/leaflet.draw.css"/>
+
+    <!-- 自定义css引用 -->
+    <link rel="stylesheet" href="login/css/login.css"/>
+    <link rel="stylesheet" href="home/css/home.css"/>
+    <link rel="stylesheet" href="base/widget/map/css/map.css"/>
+    <link rel="stylesheet" href="jqQuery/css/jqQuery.css"/>
+    <link rel="stylesheet" href="ajQuery/css/ajQuery.css"/>
+    <link rel="stylesheet" href="base/widget/genealogy/css/genealogy2.css"/>
+    <link rel="stylesheet" href="personSet/css/personSet.css"/>
+    <link rel="stylesheet" href="home/css/popdetail.css"/>
+
+    <!-- 类库js应用-->
+    <!--hashmap工具-->
+    <script src="base/utils/HashMap.js"></script>
+    <script src="base/utils/jqlbHashMap.js"></script>
+    <script src="base/utils/CrimeDataCache.js"></script>
+
+    <script src="frameWork/jquery/jquery-1.11.2.js"></script>
+    <script src="frameWork/angular/1.3.10/angular.js"></script>
+    <script src="frameWork/angular/1.3.10/angular-route.js"></script>
+    <script src="frameWork/uirouter/angular-ui-router-0.2.13.js"></script>
+    <script src="frameWork/angular/1.3.10/angular-cookies.js"></script>
+    <script src="frameWork/bootstrap/3.3.4/js/bootstrap.js"></script>
+    <script src="frameWork/EzServerClient7/EzServerClient-src.js"></script>
+    <script src="frameWork/EzServerClient7/EzServerClient-heatmap.js"></script>
+    <script src="frameWork/EzServerClient7/MarkerClusterGroup.js"></script>
+    <script src="frameWork/EzServerClient7/heatmap.js"></script>
+    <!--alert控件-->
+    <script src="frameWork/alertWidget/jquery.bootstrap-crimeAlert.js"></script>
+    <!--日期控件-->
+    <script src="frameWork/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="frameWork/bootstrap-datetimepicker/js/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+
+    <!-- 自定义js引用 -->
+    <!-- 配置文件 -->
+    <script src="config/initConfig.js"></script>
+    <script src="config/EzMapConfig.js"></script>
+
+    <!-- base/service -->
+    <script src="home/js/app.js"></script>
+    <script src="base/service/AjaxService.js"></script>
+    <script src="login/js/login.js"></script>
+    <!--题图操作js-->
+    <script src="base/service/DrawGraphService.js"></script>
+    <script src="base/service/AuthService.js"></script>
+
+
+    <!-- 警情查询模块 -->
+    <script src="jqQuery/js/jqQuery_controller.js"></script>
+    <script src="jqQuery/js/jqQuery_service.js"></script>
+
+    <!-- 案件查询模块 -->
+    <script src="ajQuery/js/ajQuery_controller.js"></script>
+    <script src="ajQuery/js/ajQuery_service.js"></script>
+
+    <!--个人设置模块-->
+    <script src="personSet/js/PersonSetCtrl.js"></script>
+    <script src="personSet/js/PersonSetService.js"></script>
+
+    <!-- 基础组件 -->
+    <script src="base/widget/componets/js/ezComponents.js"></script>
+    <script src="base/widget/map/js/mapCtrl.js"></script>
+    <script src="base/widget/map/js/mapService.js"></script>
+
+    <!--地图工具栏begin-->
+    <script src="frameWork/draw/Control.Draw.js"></script>
+    <script src="frameWork/draw/Leaflet.draw.js"></script>
+    <script src="frameWork/draw/Toolbar.js"></script>
+    <script src="frameWork/draw/Tooltip.js"></script>
+
+    <script src="frameWork/draw/ext/GeometryUtil.js"></script>
+    <script src="frameWork/draw/ext/LatLngUtil.js"></script>
+    <script src="frameWork/draw/ext/LineUtil.Intersect.js"></script>
+    <script src="frameWork/draw/ext/Polygon.Intersect.js"></script>
+    <script src="frameWork/draw/ext/Polyline.Intersect.js"></script>
+
+    <script src="frameWork/draw/draw/DrawToolbar.js"></script>
+    <script src="frameWork/draw/draw/handler/Draw.Feature.js"></script>
+    <script src="frameWork/draw/draw/handler/Draw.SimpleShape.js"></script>
+    <script src="frameWork/draw/draw/handler/Draw.Circle.js"></script>
+    <script src="frameWork/draw/draw/handler/Draw.Marker.js"></script>
+    <script src="frameWork/draw/draw/handler/Draw.Polyline.js"></script>
+    <script src="frameWork/draw/draw/handler/Draw.Polygon.js"></script>
+    <script src="frameWork/draw/draw/handler/Draw.Rectangle.js"></script>
+
+    <script src="frameWork/draw/edit/EditToolbar.js"></script>
+    <script src="frameWork/draw/edit/handler/Edit.SimpleShape.js"></script>
+    <script src="frameWork/draw/edit/handler/Edit.Circle.js"></script>
+    <script src="frameWork/draw/edit/handler/Edit.Poly.js"></script>
+    <script src="frameWork/draw/edit/handler/Edit.Rectangle.js"></script>
+    <script src="frameWork/draw/edit/handler/EditToolbar.Delete.js"></script>
+    <script src="frameWork/draw/edit/handler/EditToolbar.Edit.js"></script>
+    <!--地图工具栏end-->
+
+
+    <!-- 警情类别，案件类别模块 -->
+    <script src=    "base/widget/genealogy/js/genealogy_module.js"></script>
+    <script src="base/service/BaseDataService.js"></script>
+
+    <!-- 工具库 -->
+    <script src="base/utils/tools.js"></script>
+    <script src="base/utils/NativeObjectExtension.js"></script>
+
+    <link rel="stylesheet" href="frameWork/font/font-awesome-4.3.0/css/font-awesome.css"/>
+    <link rel="stylesheet" href="frameWork/font/font-icomoon-flat/style.css"/>
+
+    <!-- 动画库 -->
+    <script src="frameWork/animate/animate.js"></script>
+    <link rel="stylesheet" href="frameWork/animate/example.animate.css"/>
+
+    <!-- 人员查询模块 -->
+    <script src="personQuery/js/personQuery_controller.js"></script>
+    <script src="personQuery/js/personQuery_service.js"></script>
+    <link rel="stylesheet" href="personQuery/css/personQuery.css"/>
+
+
+
+
+
+
+</head>
+<body>
+    <div ui-view class="full-screen">
+
+    </div>
+</body>
+</html>

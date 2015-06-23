@@ -1,0 +1,161 @@
+/*global*/
+.full-screen{
+    background-image: url("../images/login_bg_pic01.png");
+    width: 100%;
+    height: 100%;
+    position: absolute;
+
+}
+
+.height-spread{
+    height: 100%;
+}
+
+/* 主体区域*/
+.ez-home-panel{
+    background-color: #d58512;
+}
+/* 左侧导航区 */
+.ez-nav-panel{
+    /*background-image: url("../images/left_navi_bg.png");
+    -webkit-background-image: url("../images/left_navi_bg.png");*/
+    float: left;
+    background-color: #ffffff;
+    width: 80px;
+    border-right: 2px #5e5e5e solid;
+    text-align: center;
+    padding-top: 10px;
+}
+
+/* 右侧主体显示区：如地图、或分析报告等*/
+.ez-mainview-panel{
+    /*background-color: cyan;*/
+    float: left;
+    margin: 0;
+}
+
+/* 主页 头部区域*/
+.ez-header-panel{
+    position: fixed;
+    top:0px;
+    z-index: 400;
+    background-color: #0062b7;
+    height: 80px;
+}
+
+.queryImage {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    margin-left: -5px;
+}
+
+.queryImage:hover {
+    opacity: 0.5;
+    transform: scale(1.1);
+    -ms-transform: scale(1.1); 	/* IE 9 */
+    -moz-transform: scale(1.1); 	/* Firefox */
+    -webkit-transform: scale(1.1); /* Safari 和 Chrome */
+    -o-transform: scale(1.1); 	/* Opera */
+}
+
+.queryImage + .queryImage{
+    margin-bottom: 10px;
+}
+
+.closeSys {
+    margin-top: 30px;
+    padding-right: 15px;
+}
+
+.PersonalSet {
+    margin-top: 30px;
+    padding-right: 16px;
+}
+
+.userImage{
+    margin-top: 28px;
+    padding-right: 22px;
+}
+
+.userImage>img:hover {
+    opacity: 0.5;
+}
+
+.PersonalSet>img:hover {
+    opacity: 0.5;
+}
+
+.closeSys>img:hover {
+    opacity: 0.5;
+}
+
+
+.modaldiv {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 99;
+    background: rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.loading {
+    position: absolute;
+    top: 50%;
+    background: white;
+    width: 70px;
+    height: 72px;
+    left: 50%;
+    background: rgba(0, 0, 0, 0);
+    opacity: 0.5;
+    margin-top: -36px;
+    margin-left: -30px;
+    text-align: center;
+}
+
+/* webkit内核 滚动条样式 start --------------------*/
+/*滚动条垂直方向的宽度与水平方向的高度*/
+::-webkit-scrollbar {
+    width: 0.6em;
+}
+::-webkit-scrollbar:horizontal {
+    height: 0.2em;
+}
+
+::-webkit-scrollbar-button{
+
+}
+/* Track */
+::-webkit-scrollbar-track {
+
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+
+    -webkit-border-radius: 10px;
+
+    border-radius: 10px;
+
+    background: rgba(242,242,242,0.8);
+
+}
+
+/*滚动条轨道上的按钮*/
+::-webkit-scrollbar-thumb {
+
+    -webkit-border-radius: 10px;
+
+    border-radius: 10px;
+
+    background: rgba(217,221,224,0.8);
+
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+
+    background: rgba(169,169,169,0.4);
+
+}
+/* webkit内核 滚动条样式 end --------------------*/

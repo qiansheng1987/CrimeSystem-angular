@@ -1,0 +1,106 @@
+<div ng-controller="PersonQueryController">
+    <div class="modal fade" id="personQueryModal" tabindex="-1" role="dialog" aria-labelledby="personQueryModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="-webkit-border-radius: 1em; -moz-border-radius: 1em; border-radius: 1em">
+                <div class="modal-header bg-primary dialog-title">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">人员查询</h4>
+                </div>
+                <div class="modal-body" style="padding-top: 0">
+                    <v-tabs>
+                        <pane title="身份证查询">
+                            <form class="form-horizontal" novalidate role="form" name="sfzQueryForm" ng-submit="sfzQueryHandler()">
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-lg-4 control-label-revision" for="sfzh">身份证号：</label>
+                                    <div class="col-md-8 col-lg-8">
+                                        <input type="text" class="form-control form-control-revision" id="sfzh" name="sfzh" placeholder="输入要查询的身份证号"
+                                               ng-model="personQueryForSFZH.sfzh" ng-pattern="/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/"/>
+                                    </div>
+                                </div>
+
+                                <div class="query-bottom">
+                                    <label class="col-md-10 col-lg-10 text-danger query-bottom-label">错误信息</label>
+                                    <div class="col-md-2 col-lg-2" style="padding-left: 0px; padding-right: 0px">
+                                        <button type="submit" class="btn btn-primary query-bottom-btn" name="sfzQueryBtn">查询</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </pane>
+                        <pane title="扩展查询">
+                            <form class="form-horizontal" novalidate role="form" name="extQueryFrom" ng-submit="extQueryHandler()">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2 col-lg-2 control-label-revision" for="xm">姓名：</label>
+                                    <div class="col-md-5 col-lg-5">
+                                        <input class="form-control form-control-revision" type="text" id="xm" name="xm" ng-model="personQueryForExt.name"/>
+                                    </div>
+                                    <label class="control-label col-md-2 col-lg-2 control-label-revision" for="xb">性别：</label>
+                                    <div class="col-md-3 col-lg-3">
+                                        <select class="form-control form-control-revision" name="xb" id="xb" ng-model="personQueryForExt.sex">
+                                            <option value="all" selected>全部</option>
+                                            <option value="male">男</option>
+                                            <option value="female">女</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2 col-lg-2 control-label-revision">年龄：</label>
+
+                                    <div class="col-md-5 col-lg-5">
+                                        <input class="form-control" type="number" id="ageLower" name="ageLower" required
+                                               min="0" max="120" value="20" ng-model="personQueryForExt.ageLower"
+                                               style="display:inline-block;padding-left: 0;padding-right: 0;width: 50px;"/>
+                                        <label class="form-control-static"
+                                               style="display:inline-block;padding-left: 0;padding-right: 0;width: 20px;text-align: center">至</label>
+                                        <input class="form-control" type="number" id="ageUpper" name="ageUpper" required
+                                               min="0" max="120" value="40" ng-model="personQueryForExt.ageUpper"
+                                               style="display:inline-block;padding-left: 0;padding-right: 0;width: 50px;"/>
+                                        <i class="fa fa-asterisk" style="transform: scale(0.6)"></i>
+                                    </div>
+
+                                    <label class="control-label col-md-2 col-lg-2 control-label-revision">职业：</label>
+                                    <div class="col-md-3 col-lg-3">
+                                        <input class="form-control form-control-revision" type="text" id="job" name="job" ng-model="personQueryForExt.job"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2 col-md-2 col-lg-2 control-label-revision" for="rkxz"
+                                            style="padding-left: 0px">人口类型：</label>
+                                    <div class="col-sm-10 col-md-10 col-lg-10">
+                                        <select class="form-control" name="rkxz" id="rkxz" ng-model="personQueryForExt.ryxz">
+                                            <option value="permanent">常住</option>
+                                            <option value="temporary">暂住</option>
+                                            <option value="foreign">外宾</option>
+                                            <option value="all">全部</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2 col-md-2 col-lg-2 control-label-revision" for="zzjgInPersonQuery"
+                                           style="padding-left: 0">组织机构：</label>
+                                    <div class="col-sm-10 col-md-10 col-lg-10">
+                                        <input class="form-control" type="text" id="zzjgInPersonQuery" name="zzjgInPersonQuery" ng-model=""/>
+                                    </div>
+
+                                </div>
+
+                                <div class="query-bottom">
+                                    <label class="col-md-10 col-lg-10 text-danger query-bottom-label">错误信息</label>
+                                    <div class="col-md-2 col-lg-2" style="padding-left: 0px; padding-right: 0px">
+                                        <button type="submit" class="btn btn-primary query-bottom-btn" name="extPersonQueryBtn">查询</button>
+                                    </div>
+                                </div>
+                            </form>
+
+
+                        </pane>
+                    </v-tabs>
+                </div><!-- modal-body end-->
+            </div><!-- modal-content end-->
+        </div><!-- modal-dialog end -->
+    </div><!-- modal-dialog end-->
+
+</div>

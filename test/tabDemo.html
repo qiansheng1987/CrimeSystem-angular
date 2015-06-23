@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title> ng 自定义 Tab</title>
+    <!-- 框架css引用 -->
+    <link rel="stylesheet" href="../frameWork/bootstrap/3.3.4/css/bootstrap.css"/>
+
+    <!-- 自定义css引用 -->
+    <!--<link rel="stylesheet" href="login/css/login.css"/>
+    <link rel="stylesheet" href="home/css/home.css"/>-->
+
+
+    <!-- 类库js应用-->
+    <script src="../frameWork/jquery/jquery-1.11.2.js"></script>
+    <script src="../frameWork/angular/1.3.10/angular.js"></script>
+    <script src="../frameWork/uirouter/angular-ui-router-0.2.13.js"></script>
+    <script src="../frameWork/bootstrap/3.3.4/js/bootstrap.js"></script>
+    <script src="../frameWork/bootstrap/3.3.4/css/bootstrap-theme.css"></script>
+    <script src="../frameWork/bootstrap/3.3.4/css/bootstrap.css"></script>
+
+
+    <!-- 自定义js引用 -->
+    <!-- 配置文件 -->
+    <script src="../config/initConfig.js"></script>
+    <!-- base/service -->
+    <!--<script src="../home/js/app.js"></script>-->
+    <script src="../base/service/AjaxService.js"></script>
+    <!--<script src="../login/js/login.js"></script>-->
+
+    <!-- 基础组件 -->
+    <script src="../base/widget/componets/js/ezComponents.js"></script>
+
+
+    <!-- 警情查询模块 -->
+    <script src="../jqQuery/js/jqQuery_controller.js"></script>
+    <script src="../jqQuery/js/jqQuery_service.js"></script>
+
+
+</head>
+<body>
+<!--静态模块begin-->
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1" data-whatever="@mdo">Open
+    modal for @mdo
+</button>
+
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" ng-controller="qsCtrl">
+            <div class="modal-header btn-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">警情查询</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <v-tabs>
+                        <pane title="接警编号查询">
+                            <div class="row" ng-controller="jqbhQueryController">
+                                <form class="form-horizontal" novalidate role="form" name="jqbhQueryForm"
+                                      ng-submit="queryByJqbhFn()">
+                                    <div class="form-group">
+                                        <div class="col-lg-3">
+                                            <label for="jqbhInput" class="control-label">警情编号：</label>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <input id="jqbhInput" class="form-control" name="jqbhInput" type="text"
+                                                   ng-pattern="/0-9a-zA-Z/"
+                                                   ng-model="jqbh" required/>
+                                            <span ng-show="jqbhQueryForm.jqbhInput.$dirty && jqbhQueryForm.jqbhInput.$error.required">不能为空</span>
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </div>
+                        </pane>
+                        <pane title="扩展查询">
+                            <div class="row">
+                                <form class="form-horizontal" novalidate role="form" name="extQueryForm">
+                                    <div class="form-group">
+                                        <div class="col-lg-3">
+                                            <label class="control-label " for="startTime">开始时间：</label>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <input class="form-control" id="startTime" name="startTime" type="text"
+                                                   required/>
+                                            <span ng-show="extQueryForm.startTime.$error.required">不能为空</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-3">
+                                            <label class="control-label" for="endTime">结束时间：</label>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <input class="form-control" id="endTime" name="endTime" type="text"
+                                                   required/>
+                                            <span ng-show="extQueryForm.endTime.$error.required">不能为空</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label class="control-label" for="jqReporter">报警人：</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input class="form-control" id="jqReporter" name="jqReporter" type="text"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label class="control-label" for="jqlb">警情类别：</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input class="form-control" id="jqlb" name='jqlb' type="text"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label class="control-label" for="zzjg">受理单位：</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input class="form-control" id="zzjg" name="zzjg" type="text"/>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </pane>
+                        <pane title="空间查询">
+                            <div class="h2">空间查询内容</div>
+                        </pane>
+                    </v-tabs>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" name="queryBtn" ng-click="submitJqbhQuery()">查询</button>
+                <button class="btn btn-default" name="queryBtn" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var myApp = angular.module('myApp', ['baseServiceModule', 'ez.components', 'ez.jqQueryModule']);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<div class="modaldiv" ng-if="loading">
+    <div class="loading">
+        <i class="fa fa-spinner fa-spin fa-5x" style="color:dodgerblue"></i>
+    </div>
+</div>
+<div class="row" id="headerContent" style="padding: 0px;margin: 0px;">
+    <div class="ez-header-panel col-md-12 " ui-view="header" style="padding: 0px;margin: 0px;" ng-controller="HeaderController">
+        标题区
+    </div>
+</div>
+
+<div class="row" style="padding: 0px;margin: 0px;position:relative;top:80px;" id="mapContent">
+    <div ui-view="mainhomeContent">
+    </div>
+    <div ui-view="personSetContent">
+    </div>
+</div>
+<div id="jqDiv">
+    <jq-pop></jq-pop>
+</div>
+<div id="ajDiv">
+    <aj-pop></aj-pop>
+</div>
+<div id="personQueryDiv">
+    <person-query-pop></person-query-pop>
+</div>
+<div id="testScope">
+    <person-test></person-test>
+</div>

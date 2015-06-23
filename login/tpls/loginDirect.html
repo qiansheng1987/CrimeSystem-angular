@@ -1,0 +1,40 @@
+<div id="login-div">
+        <div id="loginDiv">
+            <form id="loginForm"  name="loginForm" class="form-horizontal" novalidate ng-controller="LoginController"
+                  ng-submit="loginValidate()">
+                <p class="bg-warning" id="showTip" hidden="true">
+                </p>
+                <div id="tooltipImage"></div>
+                <div class="form-group" id="userNameGroup" ng-class="{ 'has-error' : loginForm.userName.userNameValidate}" >
+                    <label class="col-md-2 control-label invisible" for="userName" required="true">用户名</label>
+                    <div class="col-md-8">
+                        <input class="form-control"  type="text" id="userName" placeholder="用户名" ng-model="user.userName"
+                               name="userName" required="required" ng-change="changeHandler('username')"/>
+                    </div>
+                    <span style="margin-left: -30px;padding-top:6px;position: absolute;color: dimgrey"><i class="fa fa-user"></i></span>
+                </div>
+
+                <div class="form-group" id="passwordGroup" ng-class="{ 'has-error' : loginForm.password.passwordGroupValidate}">
+                    <label class="col-md-2 control-label  invisible" for="password">密码</label>
+                    <div class="col-md-8">
+                        <input class="form-control" type="password" id="password" placeholder="密码" ng-model="user.password"
+                               name="password" required="required" ng-change="changeHandler('password')"/>
+                    </div>
+                    <span style="margin-left: -30px;padding-top:6px;position: absolute;color:dimgrey"><i class="fa fa-lock"></i></span>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-6 col-md-2">
+                        <input class="btn btn-primary btn-sm" style="margin-top: 15px;" type="submit" value="登录"
+                               ng-disabled="loginForm.$invalid"/>
+                    </div>
+                    <div class="col-md-2">
+                        <input class="btn btn-primary btn-sm" style="margin-top: 15px;" type="submit" value="取消"
+                               ng-disabled="loginForm.$invalid"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+    </div>

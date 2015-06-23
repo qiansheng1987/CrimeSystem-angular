@@ -1,0 +1,145 @@
+    <div class="modal fade" id="ajModal" tabindex="-1" role="dialog" aria-labelledby="ajModalLabel"
+         aria-hidden="true" ng-controller="AjQueryController">
+        <div class="modal-dialog">
+            <div class="modal-content" style="-webkit-border-radius: 1em; -moz-border-radius: 1em; border-radius: 1em">
+                <div class="modal-header bg-primary dialog-title"
+                     style="height: 40px;-webkit-border-top-left-radius: 1em;-webkit-border-top-right-radius: 1em;-moz-border-radius-topleft: 1em;-moz-border-radius-topright:1em">
+                    <button type="button" style="position:relative;top:-8px;right:-9px;" class="close"
+                            data-dismiss="modal" aria-label="Close">
+                        <img src="./jqQuery/images/btn_closed02.png" alt="X"/>
+                    </button>
+                    <h4 class="modal-title" id="jqModalLabel">案件查询</h4>
+                </div>
+                <div class="modal-body" style="padding-top: 0">
+                    <v-tabs>
+                        <pane title="案件编号查询">
+                            <div class="row">
+                                <form class="form-horizontal" novalidate role="form" name="ajbhQueryForm" ng-submit="ajbhQuery();">
+                                    <div class="form-group" style="margin-left: 25px;">
+                                        <div class="col-lg-3">
+                                            <label for="ajbh" class="control-label">案件编号：</label>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <input class="form-control"
+                                                   style="margin-left: -20px;width: 310px;" id="ajbh" name="ajbh" type="text"
+                                                   ng-model="ajbhQueryParams.ajbh" required/>
+                                        </div>
+                                    </div>
+
+                                    <div class="query-bottom">
+                                        <label class="col-md-10 col-lg-10 text-danger"></label>
+                                        <div class="col-md-2 col-lg-2" style="padding-left: 0px; padding-right: 0px;right: 8px;">
+                                            <input class="btn btn-primary btn-sm" style="position: relative;top:-12px;width: 80px;"
+                                                   name="ajbhQueryBtn" type="submit" value="查询" ng-disabled="ajbhQueryForm.$invalid"/>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </pane>
+                        <pane title="扩展查询">
+                            <div class="row">
+                                <form class="form-horizontal" novalidate role="form" id="ajextQueryForm" name="ajextQueryForm" ng-submit="ajExtendQuery(ajextQueryForm.$valid);">
+                                    <div class="form-group" style="margin-left: 25px;">
+                                        <div class="col-lg-3">
+                                            <label class="control-label " for="ajstartTime">开始时间：</label>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <div class="input-group date startTime_datetime" style="margin-left: -20px;width: 310px;"
+                                                 data-date="2014-05-11" data-link-field="ajstartTime"
+                                                 data-link-format="yyyy-mm-dd">
+                                                <input class="form-control" ng-model="ajQueryParams.ajstartTime" ng-click="change('startTime')"
+                                                       id="ajstartTime" required
+                                                       name="ajstartTime" size="16" type="text" value="" readonly>
+                                            <span class="input-group-addon"><span
+                                                    class="glyphicon glyphicon-calendar"></span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" style="margin-left: 25px;">
+                                        <div class="col-lg-3">
+                                            <label class="control-label" for="ajendTime">结束时间：</label>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <div class="input-group date endTime_datetime" style="margin-left: -20px;width: 310px;"
+                                                 data-date="2014-05-11"
+                                                 data-link-field="ajendTime" data-link-format="yyyy-mm-dd">
+                                                <input class="form-control" ng-model="ajQueryParams.ajendTime" id="ajendTime" required
+                                                       name="ajendTime" size="16" type="text" value="" readonly ng-click="change('endTime')">
+                                            <span class="input-group-addon"><span
+                                                    class="glyphicon glyphicon-calendar"></span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="margin-left: 25px;">
+                                        <div class="col-md-3">
+                                            <label class="control-label" for="ajlb">案件类别：</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input class="form-control" style="margin-left: -20px;width: 310px;"
+                                                   ng-model="ajQueryParams.ajlbmc" id="ajlb" name='ajlb' type="text"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="margin-left: 25px;">
+                                        <div class="col-md-3">
+                                            <label class="control-label" for="ajzzjg">受理单位：</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input class="form-control" style="margin-left: -20px;width: 310px;"
+                                                   ng-model="ajQueryParams.zzjgmc" id="ajzzjg" name="ajzzjg" type="text"/>
+                                        </div>
+                                    </div>
+                                    <div class="query-bottom">
+                                        <span class="col-md-10 col-lg-10 text-danger" style="padding-left: 30px;"  id="ajExtendTip"></span>
+                                        <div class="col-md-2 col-lg-2" style="padding-left: 0px; padding-right: 0px;right:8px;">
+                                            <input class="btn btn-primary btn-sm" style="position: relative;top:-12px;width: 80px;"
+                                                   name="extAjQueryBtn" type="submit" value="查询" ng-disabled="ajextQueryForm.$invalid"/>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </pane>
+                        <pane title="空间查询">
+                            <div class="row">
+                                <form class="form-horizontal" novalidate role="form" name="spacialQueryForm">
+                                    <div class="form-group" style="margin-left: 25px;">
+                                        <div class="col-md-4">
+                                            <img src="ajQuery/images/btn_dot01.png" ng-click="submitJqbhQuery('point')"/>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <img src="ajQuery/images/btn_line01.png" ng-click="submitJqbhQuery('line')"/>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <img src="ajQuery/images/btn_rad01.png" ng-click="submitJqbhQuery('circle')"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" style="margin-left: 25px;">
+                                        <div class="col-md-4">
+                                            <img src="ajQuery/images/btn_reg01.png" ng-click="submitJqbhQuery('rectangle')"/>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <img src="ajQuery/images/btn_poly01.png" ng-click="submitJqbhQuery('polygon')"/>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control" ng-model="ajQueryParams.buffer"
+                                                   ng-init="ajQueryParams.buffer=100"
+                                                   id="buffer" name='buffer' style="width: 80px;"/>缓存区
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </pane>
+                    </v-tabs>
+                </div><!-- modal-body end-->
+            </div><!-- modal-content end-->
+        </div><!-- modal-dialog end -->
+
+        <!--组织机构-->
+        <div class="modal-above-zzjg" id="zzjg_panel_pop">
+            <zzjg id="zzjg_panel">
+                <genealogy id="zzjg_genealogy" type="ajQuery" data-parentdiv = '.modal-above-zzjg'>
+                </genealogy>
+            </zzjg>
+        </div>
+    </div><!-- modal-dialog end-->

@@ -1,0 +1,157 @@
+<div ng-controller="JqQueryController">
+    <div class="modal fade" id="jqModal" tabindex="-1" role="dialog" aria-labelledby="jqModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" ng-controller="submitCtrl"
+                 style="-webkit-border-radius: 1em;-moz-border-radius: 1em;border-radius: 1em;">
+                <div class="modal-header btn-primary"
+                     style="height: 40px;-webkit-border-top-left-radius: 1em;-webkit-border-top-right-radius: 1em;-moz-border-radius-topleft: 1em;-moz-border-radius-topright:1em">
+                    <button type="button" style="position:relative;top:-8px;right:-9px;" class="close"
+                            data-dismiss="modal" aria-label="Close">
+                        <img src="./jqQuery/images/btn_closed02.png" alt="X"/>
+                    </button>
+                    <h4 class="modal-title" id="jqModalLabel">警情查询</h4>
+                </div>
+                <div class="modal-body" style="padding: 0px;margin-left:14px;">
+                    <v-tabs>
+                        <pane title="接警编号查询">
+                            <!-- <div class="row">-->
+                            <form class="form-horizontal" novalidate role="form" name="jqbhQueryForm">
+                                <div class="form-group" style="margin-left: 5px;">
+                                    <div class="col-lg-3">
+                                        <label for="jqbhInput" class="control-label">警情编号：</label>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <input id="jqbhInput" class="form-control"
+                                               style="margin-left: -20px;width: 310px;" name="jqbhInput" type="text"
+                                               ng-model="jqQueryParams.jqbh" required/>
+                                        <span ng-show="jqbhQueryForm.jqbhInput.$dirty && jqbhQueryForm.jqbhInput.$error.required">不能为空</span>
+                                    </div>
+                                </div>
+                            </form>
+                            <!--</div>-->
+                        </pane>
+                        <pane title="扩展查询">
+                            <!--<div class="row">-->
+                            <form class="form-horizontal" novalidate role="form" name="extQueryForm">
+                                <div class="form-group" style="margin-left: 5px;">
+                                    <div class="col-lg-3">
+                                        <label class="control-label " for="startTime">开始时间：</label>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <div class="input-group date startTime_datetime" style="margin-left: -20px;"
+                                             data-date="2014-05-11" data-link-field="startTime"
+                                             data-link-format="yyyy-mm-dd">
+                                            <input class="form-control" ng-model="jqQueryParams.startTime"
+                                                   id="startTime"
+                                                   name="startTime" size="16" type="text" value="" readonly>
+                                            <span class="input-group-addon"><span
+                                                    class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                        <span ng-show="extQueryForm.startTime.$error.required">不能为空</span>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-left: 5px;">
+                                    <div class="col-lg-3">
+                                        <label class="control-label" for="endTime">结束时间：</label>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <div class="input-group date endTime_datetime" style="margin-left: -20px;"
+                                             data-date="2012-05-11"
+                                             data-link-field="endTime" data-link-format="yyyy-mm-dd">
+                                            <input class="form-control" ng-model="jqQueryParams.endTime" id="endTime"
+                                                   name="endTime" size="16" type="text" value="" readonly>
+                                            <span class="input-group-addon"><span
+                                                    class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                        <span ng-show="extQueryForm.endTime.$error.required">不能为空</span>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-left: 5px;">
+                                    <div class="col-md-3">
+                                        <label class="control-label" for="jqReporter">报警人：</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input class="form-control" style="margin-left: -20px;width: 310px;"
+                                               ng-model="jqQueryParams.jqReporter" id="jqReporter" name="jqReporter"
+                                               type="text"/>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-left: 5px;">
+                                    <div class="col-md-3">
+                                        <label class="control-label" for="jqlb">警情类别：</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <!--<input class="form-control" style="margin-left: -20px;width: 310px;"
+                                               ng-model="jqQueryParams.jqlb" id="jqlb" name='jqlb' type="text"/>-->
+                                        <input class="form-control" style="margin-left: -20px;width: 310px;"
+                                               ng-model="jqQueryParams.jqlbmc" id="jqlb" name='jqlb' type="text"/>
+
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-left: 5px;">
+                                    <div class="col-md-3">
+                                        <label class="control-label" for="zzjg">受理单位：</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input class="form-control" style="margin-left: -20px;width: 310px;"
+                                               ng-model="jqQueryParams.zzjgmc" id="zzjg" name="zzjg" type="text"/>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- </div>-->
+                        </pane>
+                        <pane title="空间查询">
+                            <form class="form-horizontal" novalidate role="form" name="spacialQueryForm">
+                                <div class="form-group" style="margin-left: 25px;">
+                                    <div class="col-md-4">
+                                        <img src="jqQuery/images/btn_dot01.png" ng-click="submitJqbhQuery('point')"/>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <img src="jqQuery/images/btn_line01.png" ng-click="submitJqbhQuery('line')"/>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <img src="jqQuery/images/btn_rad01.png" ng-click="submitJqbhQuery('circle')"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="margin-left: 25px;">
+                                    <div class="col-md-4">
+                                        <img src="jqQuery/images/btn_reg01.png" ng-click="submitJqbhQuery('rectangle')"/>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <img src="jqQuery/images/btn_poly01.png" ng-click="submitJqbhQuery('polygon')"/>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" ng-model="jqQueryParams.buffer"
+                                               ng-init="jqQueryParams.buffer=100"
+                                               id="buffer" name='buffer' style="width: 80px;"/>缓存区
+                                    </div>
+                                </div>
+                            </form>
+                        </pane>
+                    </v-tabs>
+
+                </div>
+                <div class="modal-footer" style="height: 45px;">
+                    <input class="btn btn-primary btn-sm" style="position: relative;top:-12px;width: 80px;" type="submit" value="查询"
+                           ng-click="submitJqbhQuery()" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-above-jqlb" id="jqlb_panel_pop">
+        <jqlb id="jqlb_panel">
+            <genealogy id="jqlb_genealogy" data-parentdiv = '.modal-above-jqlb'>
+            </genealogy>
+        </jqlb>
+    </div>
+    <div class="modal-above-zzjg" id="zzjg_panel_pop">
+        <zzjg id="zzjg_panel">
+            <genealogy id="zzjg_genealogy" data-parentdiv = '.modal-above-zzjg'>
+            </genealogy>
+        </zzjg>
+    </div>
+
+</div>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+    <link rel="stylesheet" type="text/css" href="../frameWork/EzServerClient7/css/EzMap.css">
+    <link type="text/css" rel="stylesheet" href="../base/widget/map/css/map.css">
+    <!--<script charset="gb2312" src="../config/EzMapAPI.js"></script>-->
+    <script src="../config/EzMapConfig.js"></script>
+    <script src="../frameWork/EzServerClient7/EzServerClient-src.js"></script>
+    <script src="../frameWork/jquery/jquery-1.11.2.js"></script>
+
+    <script type="text/javascript">
+        /*
+        * 北京坐标范围 115 - 117 ， 39.39 - 40.99
+        *
+        * */
+            $(function(){
+                // create a map in the "map" div, set the view to a given place and zoom
+                var shijie = EzServerClient.tileLayer( mapConfig.shijie,{
+                    isEzMap:true
+                });
+
+                // add an  tile layer
+                var map = new EzServerClient.Map('fmap', {
+                    center: mapConfig.center,
+                    crs: EzServerClient.CRS.EPSG4326Ez,
+                    zoom: mapConfig.zoom,
+                    isEzMap: mapConfig.isEzMap,
+                    layers: [shijie]
+                });
+
+                /*//  给地图添加事件
+                var popup = EzServerClient.popup();
+                function onMapClick(e) {
+                    popup
+                            .setLatLng(e.latlng)
+                            .setContent("You clicked the map at " + e.latlng.toString())
+                            .openOn(map);
+                }
+                map.on('click', onMapClick);*/
+
+                //添加一个圆形，参数列表：坐标，圆半径（单位米），圆形选项设置
+                var circle = EzServerClient.circle([39.7508, 115.953], 500, {
+                    color: 'red',
+                    fillColor: '#f03',
+                    fillOpacity: 0.5
+                }).addTo(map);
+
+                // add a marker in the given location, attach some popup content to it and open the popup
+                EzServerClient.marker([39.602, 117.33]).addTo(map)
+                        .bindPopup('A pretty CSS3 popup. <br> Easily customizable.')
+                        .openPopup();
+
+                //添加图片marker
+                var greenIcon = EzServerClient.icon({
+                    iconUrl: 'leaf-green.png',
+                    iconSize:     [38, 95], // size of the icon
+                    shadowSize:   [50, 64], // size of the shadow
+                    iconAnchor:   [50, 100], // point of the icon which will correspond to marker's location
+                    shadowAnchor: [4, 62],  // the same for the shadow
+                    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+                });
+                EzServerClient.marker([38.95, 117.63], {icon: greenIcon}).addTo(map);
+
+
+            });
+
+
+
+    </script>
+    <style>
+        #fmap {
+            width: 1350px;
+            height: 800px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="fmap"></div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,142 @@
+<div class="col-md-1 person_left_panel" id="navicateContent" ng-controller="UserInfoCtrl">
+    <div id="jqQueryID" class="person_left_panel_image">
+        <i class="fa fa-user fa-5x userImage"></i>
+    </div>
+    <div class="userInfo">
+        <label for="username">姓名:</label>
+        <span class="currentUser" ng-bind="currentUser"></span>
+        <span class="loginTime">上次登录时间:</span>
+        <span class="userLoginTimeRecent" ng-bind="userLoginTimeRecent"></span>
+        <span class="loginAddress">上次登录地址:</span>
+        <span class="userLoginIpRecent" ng-bind="userLoginIpRecent"></span>
+    </div>
+    <div class="personSet_tab">
+        <ul class="nav nav-tabs nav-stacked" style="-webkit-border-radius: 0px;
+                -moz-border-radius: 0px; border-radius: 0px;">
+            <li role="presentation" class="active" style="width:155px;" id="personSet_log">
+                <a ui-sref-active="active" ui-sref=".log">日志记录</a>
+            </li>
+
+            <li role="presentation" style="width:155px;" id="personSet_jq">
+                <a ui-sref-active="active"  ui-sref=".jqlbSet">关注警情</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div ng-controller="PersonSetCtrl">
+    <div class="col-md-11 person_right_panel" >
+        <div class="personset_title">
+            <div class="set_operateItem">
+                <button class="btn btn-default" ng-click="logManager();">日志管理</button>
+                <button class="btn btn-default" ng-click="jqSet();">警情配置</button>
+                <button class="btn btn-default" ng-click="goMainHome();">首页</button>
+            </div>
+        </div>
+        <div class="content">
+            <div ui-view="logView"></div>
+        </div>
+    </div>
+    <!--日志查询框-->
+    <div class="modal fade" id="logManager">
+            <div class="modal-dialog">
+                <div class="modal-content" style="width: 500px;-webkit-border-radius: 1em;-moz-border-radius: 1em;border-radius: 1em;">
+                    <div class="modal-header "
+                         style="background-color: #0062b7;height: 40px;">
+                        <div style="position:relative;top:-8px;right:-9px;" class="close"
+                                data-dismiss="modal" aria-label="Close">
+                            <img src="./jqQuery/images/btn_closed02.png" alt="X"/>
+                        </div>
+                        <h4 class="modal-title" id="log_query_title">日志管理</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" novalidate role="form" name="logQueryForm">
+                            <div class="form-group" style="margin-left: 5px;">
+                                <div class="col-md-3">
+                                    <label class="control-label" for="username">用户名：</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input class="form-control" style="margin-left: -20px;width: 314px;"
+                                           ng-model="logQueryParams.username" id="username" name="username"
+                                           type="text"/>
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-left: 5px;">
+                                <div class="col-md-3">
+                                    <label class="control-label" for="operateType">操作类型：</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" ng-model="logQueryParams.operateType"
+                                               id="operateType"
+                                               name="operateType" style="margin-left: -20px;width: 314px;">
+                                        <input type="text" class="form-control" ng-model="logQueryParams.operateTypeTemp"
+                                               id="operateTypeTemp"
+                                               name="operateTypeTemp" style="margin-left: -20px;width: 314px;" ng-hide="true">
+                                        <div class="input-group-btn">
+                                            <button type="button" class="btn btn-default dropdown-toggle"
+                                                    style="margin-left:-34px;z-index: 500;"
+                                                    data-toggle="dropdown" aria-expanded="false">
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-right" onclick="" role="menu" style="width: 314px;" id="operateTypeID">
+                                                <li value="0"><a>登录</a></li>
+                                                <li value="5"><a>查询</a></li>
+                                                <li value="1"><a>退出</a></li>
+                                                <li value="2"><a>添加</a></li>
+                                                <li value="4"><a>修改</a></li>
+                                                <li value="3"><a>删除</a></li>
+                                                <li value="6"><a>分析</a></li>
+                                                <li value="9"><a>其他</a></li>
+                                            </ul>
+                                        </div>
+                                        <!-- /btn-group -->
+                                    </div>
+                                    <!-- /input-group -->
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-left: 5px;">
+                                <div class="col-lg-3">
+                                    <label class="control-label " for="startTime">操作时间：</label>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="control-label " for="startTime" style="margin-left: -20px;">From：</label>
+                                    <div class="input-group date startTime_datetime" style="margin-left: -20px;width: 150px;"
+                                         data-date="2014-05-11" data-link-field="startTime"
+                                         data-link-format="yyyy-mm-dd">
+                                        <input class="form-control" ng-model="logQueryParams.startTime"
+                                               id="startTime" name="startTime" size="16" type="text" value="" readonly>
+                                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <label class="control-label " for="endTime" style="margin-left: -15px;">To：</label>
+                                    <div class="input-group date endTime_datetime" style="margin-left: -15px;width: 150px;"
+                                         data-date="2014-05-11" data-link-field="endTime"
+                                         data-link-format="yyyy-mm-dd">
+                                        <input class="form-control" ng-model="logQueryParams.endTime"
+                                               id="endTime" name="endTime" size="16" type="text" value="" readonly>
+                                                <span class="input-group-addon"><span
+                                                        class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer" style="height: 45px;">
+                        <input class="btn btn-primary btn-sm" style="position: relative;top:-12px;width: 60px;" type="submit" value="查询"
+                               ng-click="queryLog();" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!--警情配置-->
+    <div class="modal-above-jqlb2" id="jqlb_panel_pop">
+        <jqlb id="jqlb_panel">
+            <genealogy id="jqlb_genealogy" type="jqlb_set" data-parentdiv = '.modal-above-jqlb2'>
+            </genealogy>
+        </jqlb>
+    </div>
+
+</div>
+
+

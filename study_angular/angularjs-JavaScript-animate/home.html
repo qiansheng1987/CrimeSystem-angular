@@ -1,0 +1,20 @@
+<div class="row">
+    Filter Courses: <input type="text" ng-model="courseFilter" />
+    &nbsp;&nbsp;&nbsp;
+    Sort By: <select ng-model="sortExpression">
+    <option value="level">Level</option>
+    <option value="topic">Topic</option>
+    <option value="category">Category</option>
+    <option value="rating">Rating</option>
+</select>
+    <div class="right"><input type="checkbox" ng-model="showFirstCourses" /> Show First 3 Courses</div>
+</div>
+<br />
+<br />
+<div class="row">
+    <div data-ng-repeat="course in courses | filter: courseFilter | orderBy: sortExpression"
+         ng-hide="showFirstCourses && $index > 2" class="repeat-animation hide-animation col-md-3">
+
+        <div course-details class="det-anim" style="margin-bottom: 2px;" title="{{course.title}}"></div>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+html{
+    width: 100% !important;
+    height: 100% !important;
+    margin-bottom: 0px;
+    /*border: solid 4px blue;*/
+}
+
+body{
+    background-image: url(../images/login_bg_color01.png);
+    overflow: hidden;
+}
+
+#login-div{
+    margin-left: 450px;
+    margin-top: 200px;
+    border: 1px solid #ffffff;
+    /*background-image: url("../images/login_box.png");*/
+    background-color: #ffffff;
+    opacity: 0.9;
+    width: 414px;
+    height: 254px;
+}
+
+#loginForm {
+    margin-top: 60px;
+}
+
+#showTip {
+    padding-top: 5px;
+    text-align: left;
+    height: 28px;
+    width: 263px;
+    position: fixed;
+    top:220px;
+    margin-left: 75px;
+    background-color: #ffebeb;
+    border: 1px salmon dotted;
+}
+
+#tooltipImage {
+    background-image: url("../images/tishi.png");
+    padding-top: 5px;
+    position: fixed;
+    top:270px;
+    margin-left: 5px;
+
+}

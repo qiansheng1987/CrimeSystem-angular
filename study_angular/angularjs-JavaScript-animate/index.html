@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link data-require="bootstrap-css@3.x" data-semver="3.1.1" rel="stylesheet" href="bootstrap/3.3.4/css/bootstrap.css" />
+    <script data-require="jquery@*" data-semver="2.1.1" src="jquery/jquery-1.11.2.js"></script>
+    <script data-require="angular.js@*" data-semver="1.3.0-beta.5" src="angular/1.3.10/angular.js"></script>
+    <script data-require="angular-animate@*" data-semver="1.2.16" src="angular/1.3.10/angular-animate.js"></script>
+    <script data-require="angular-route@*" data-semver="1.2.16" src="angular/1.3.10/angular-route.js"></script>
+
+    <script data-require="underscore.js@*" data-semver="1.6.0" src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="animations.css" />
+    <script src="script.js"></script>
+    <script src="animations.js"></script>
+</head>
+
+<body ng-app="coursesApp">
+<div class="container">
+    <div class="row page-header">
+        <h2>Virtual Training</h2>
+    </div>
+    <div data-ng-view="" id="div-view" class="view-slide-in"></div>
+</div>
+
+<script type="text/ng-template" id="courseDetails.html">
+    <div class="thumbnail">
+        <div class="caption"><strong>{{course.title}}</strong></div>
+        <div ng-show="viewDetails">
+            <div style="text-align:center;">{{course.topic}}</div>
+            <span  style="margin-right: 9px;">Level: {{course.level}}</span>
+            <span class="right">Category: {{course.category}}</span>
+            <br />
+            <span class="left" style="margin-right: 9px;">Rated: {{course.rating}}/5</span>
+        </div>
+        <div ng-hide="viewDetails">
+            Total Views: {{course.totalViews}} <br />
+            Last Week Views: {{course.lastWeekViews}} <br />
+        </div>
+        <div class="left"><a href="#/course/{{course.id}}">View Course</a></div>
+        <div class="right">
+            <button class="right btn-link" ng-show="!viewDetails">Details</button>
+            <button class="right btn-link" ng-show="viewDetails">Statistics</button>
+        </div>
+    </div>
+    <br />
+</script>
+</body>
+
+</html>

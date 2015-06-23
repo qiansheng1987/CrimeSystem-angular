@@ -1,0 +1,132 @@
+<div class="genealogy">
+    <div class="genealogy-dialog">
+
+        <div class="genealogy-content">
+            <div class="genealogy-title btn-primary">
+                {{titleStr}}选择
+                <i class="icon-cross close-icon" ng-click="close()"></i>
+            </div>
+
+            <div class="genealogy-header">
+                <div class="list-checked">
+                    <ul class="list-inline">
+                        <li ng-repeat="item in resultGenealogy.listChecked">
+                            <label title="{{item['@attributes']['name']}}" style="text-align: ">{{item['@attributes']['name']}}
+                            </label>
+                            <span class="icon-cross" ng-click="removeFromCheckedList()"></span>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="operator">
+                    <ul class="list-unstyled" style="text-align: center">
+                        <li>
+                            <button class="btn btn-default" style="padding: 0 6px" ng-class="{ 'hidden':resultGenealogy.listChecked.length<=10}"
+                                    ng-click="moreBtnHandler()">更多</button>
+                        </li>
+                        <li>
+                            <button class="btn btn-primary" style="padding: 0 6px" ng-click="okBtnHandler()">确定</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="genealogy-search">
+                <div class="genealogy-search-input">
+                    <input class="form-control" type="text" ng-model="matchStr" ng-change="doSearchFilter($event)"/>
+                    <span class="glyphicon glyphicon-search form-control-feedback" style="left: 460px"></span>
+                </div>
+
+                <div class="genealogy-search-result">
+                    <select size='5' ng-model="searchSourceDatas.optsSeclected"  ng-click="searchResultSelect()"
+                            ng-if="searchSourceDatas.listData.length" autofocus
+                            ng-options="opt['@attributes']['name'] for opt in searchSourceDatas.listData">
+                        <option value="">-- 选择{{titleStr}} --</option>
+                    </select>
+                </div>
+            </div><!-- genealogy-search end-->
+
+            <div class="genealogy-body">
+
+                <!-- 第一层布局 （即大类布局）-->
+                <div  class="genealogy-body-state1" style="">
+                    <div class="first-level-main">
+                        <ul class="list-inline" >
+                            <li ng-repeat="item in viewData.firstLevelData" bind-data itemData=''>
+                                <a href="##"><i class="fa fa-square-o" ng-click="onCleckItem($event)"></i>
+                                    <label ng-click="doFirstLevelFromState1ToState2($event)" title="{{item['@attributes']['name']}}">
+                                        {{item['@attributes']['name']}}</label></a>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <div class="first-level-assist">
+                        <ul class="list-inline">
+                            <li style="width: 70px; text-align: start;" ng-click="selectAllHandler( $event)"><a href="##"><i class="fa fa-square-o"><label>&nbsp;全选</label></i></a></li>
+                            <li style="width: 70px; text-align: start;" ng-click="unSelectAllHandler($event)"><a href="##"><i class="fa fa-square-o"><label>&nbsp;全不选</label></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 第一层布局 （即大类布局） end-->
+
+                <!-- 第二层 -->
+                <!-- 第二层 第一列，大类布局 -->
+                <div class="genealogy-body-state2 first-level-panel-state2">
+                    <h5>{{ viewData.firstLevelTitle }}</h5>
+                    <div class="second-level-main">
+                        <ul class="list-unstyled">
+                            <li ng-repeat="item in viewData.firstLevelData" bind-data itemData=''>
+                                <a href="##"><i class="fa fa-square-o" ng-click="onCleckItem($event)"></i>
+                                    <label ng-click="toSecondLevel($event)" title="{{item['@attributes']['name']}}">
+                                        {{item['@attributes']['name']}}</label></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 第二层 第二列，中类布局 -->
+                <div class="genealogy-body-state2 second-level-panel-state2">
+                    <h5>{{ viewData.secondLevelTitle }}</h5>
+                    <div class="second-level-main">
+                        <ul class="list-unstyled">
+                            <li ng-repeat="item in viewData.secondLevelData" bind-data itemData=''>
+                                <a href="##"><i class="fa fa-square-o" ng-click="onCleckItem($event)"></i>
+                                    <label ng-click="toThirdLevel($event)" title="{{item['@attributes']['name']}}">
+                                        {{item['@attributes']['name']}}</label></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 第二层 第三列，小类布局 -->
+                <div  class="genealogy-body-state2 third-level-panel-state2" >
+                    <h5>{{viewData.thirdLevelTitle}}</h5>
+                    <div class="second-level-main">
+                        <ul class="list-unstyled">
+                            <li ng-repeat="item in viewData.thirdLevelData" bind-data itemData=''>
+                                <a href="##"><i class="fa fa-square-o" ng-click="onCleckItem($event)"></i>
+                                    <label ng-click="toForthLevel($event)" title="{{item['@attributes']['name']}}">
+                                        {{item['@attributes']['name']}}</label></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 第二层 第四列，微类布局 -->
+                <div class="genealogy-body-state2 forth-level-panel-state2">
+                    <h5>{{viewData.forthLevelTitle}}</h5>
+                    <div class="second-level-main">
+                        <ul class="list-unstyled">
+                            <li ng-repeat="item in viewData.forthLevelData" bind-data itemData=''>
+                                <a href="##"><i class="fa fa-square-o" ng-click="onCleckItem($event)"></i>
+                                    <label title="{{item['@attributes']['name']}}">{{item['@attributes']['name']}}</label></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 第二层 end -->
+            </div> <!-- genealogy-body end -->
+
+        </div> <!-- genealogy-content end-->
+
+    </div> <!-- genealogy-dialog end-->
+
+</div>

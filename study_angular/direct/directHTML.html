@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html ng-app="dd">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+    <!-- 框架css引用 -->
+    <link rel="stylesheet" href="../../frameWork/bootstrap/3.3.4/css/bootstrap.css"/>
+
+    <!-- 类库js应用-->
+    <script src="../../frameWork/jquery/jquery-1.11.2.js"></script>
+    <script src="angular.js"></script>
+    <script src="./directController.js"></script>
+
+    <style>
+        input.ng-invalid {
+            border: 1px solid red;
+        }
+        input.ng-valid {
+            border: 1px solid green;
+        }
+        .red{
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <my-directive my-url="http://google.com"
+                  my-link-text="Click me to go to Google" some-attr="someProperty with @ binding">
+        <div>这是指令的一部分</div>
+    </my-directive>
+
+    <!--ng 内置指令-->
+    <h1>Demo 1:</h1>
+    <input type="text" ng-model="someProperty" placeholder="Type to Enable">
+    <button ng-model="button" ng-disabled="!someProperty">A Button</button>
+
+    <h1>Demo 2:</h1>
+    <textarea ng-disabled="isDisabled">Wait 1 second</textarea>
+
+    <script>
+        // JS for demo 2:
+        angular.module('myApp', [])
+                .run(function($rootScope, $timeout) {
+                    $rootScope.isDisabled = false;
+                    $timeout(function() {
+                        $rootScope.isDisabled = true;
+                    }, 2000);
+                });
+    </script>
+    <br>
+    <h1>-------------ng-checked------------------</h1>
+    <label>someProperty = {{anotherProperty}}</label>
+    <input type="checkbox"
+           ng-checked="anotherProperty"
+           ng-init="anotherProperty = false"
+           ng-model="anotherProperty">
+    <label>someProperty = {{someProperty}}</label>
+    <input type="checkbox"
+           ng-checked="someProperty"
+           ng-init="someProperty=true"
+            ng-model="someProperty"/>
+    <br>
+    <h1>-------------ng-selected------------------</h1>
+    <label>Select Two Fish:</label>
+    <input type="checkbox"
+           ng-model="isTwoFish"><br/>
+    <select>
+        <option>One Fish</option>
+        <option ng-selected="isTwoFish">Two Fish</option>
+    </select>
+
+    <br>
+    <h1>-------------用户单击之前，href不会加载------------------</h1>
+    <!-- 用户单击之前，href不会加载 -->
+    <a href="{{ myHref }}">I'm feeling 404</a>
+
+    <br>
+    <h1>-------------ng-controller------------------</h1>
+    <!--
+        由于原型继承的关系，修改父级对象中的someBareValue会同时修改子对象中的值，但反之则不行。
+    -->
+    <div ng-controller="SomeController">
+        {{someBareValue}}
+        <button ng-click="someAction()">Communication to child</button>
+        <div ng-controller="ChildController">
+            {{someBareValue}}
+            <button ng-click="childAction()">Communicate to parent</button>
+        </div>
+    </div>
+
+    <br>
+    <h1>-------------ng-swith------------------</h1>
+    <input type="text" ng-model="person.name"/>
+    <div ng-switch on="person.name">
+        <p ng-switch-default>And the winner is</p>
+        <h1 ng-switch-when="Ari">{{person.name}}</h1>
+    </div>
+
+    <br>
+    <h1>-------------ng-if------------------</h1>
+    <div ng-if="2+2==5">
+        wont see this dom node, not even in the source code
+    </div>
+    <div ng-if="2+2==4">
+        Hi I do exist
+    </div>
+
+    <br/>
+    <h1>-------------ng-change------------------</h1>
+    <div ng-controller="EquationController">
+        <input type="text" ng-model="equation.x" ng-change="change()"/>
+        <code>{{equation.output}}</code>
+    </div>
+
+    <br/>
+    <h1>-------------ng-from------------------</h1>
+    <!--
+        ng-form用来在一个表单内部嵌套另一个表单。普通的HTML <form>标签不允许嵌套，但
+        ng-form可以。
+    -->
+
+    <form name="signup_form"
+          ng-controller="FormController"
+          ng-submit="submitForm()" novalidate>
+        <div ng-repeat="field in fields"
+             ng-form="signup_form_input">
+            <input type="text"
+                   name="dynamic_input"
+                   ng-required="field.isRequired"
+                   ng-model="field.name"
+                   placeholder="{{field.placeholder}}" />
+            <div ng-show="signup_form_input.dynamic_input.$dirty && signup_form_input.dynamic_input.$invalid">
+                <span class="error"  ng-show="signup_form_input.dynamic_input.$error.required">
+                    The field is required.
+                </span>
+            </div>
+        </div>
+        <button type="submit"
+                ng-disabled="signup_form.$invalid">
+            Submit All
+        </button>
+    </form>
+
+    <br/>
+    <h1>-------------ng-select------------------</h1>
+    <div ng-controller="CityController">
+        <select ng-model="city" ng-options="city.name for city in cities">
+            <option value="">Choose City</option>
+        </select>
+        Best City: {{city.name}}
+    </div>
+
+    <br/>
+    <h1>-------------ng-select------------------</h1>
+    <div ng-controller="LotteryController">
+        <div ng-class="{red: x > 5}" ng-if="x>5">
+            You won!
+        </div>
+        <button ng-click="x = generateNumber()"
+                ng-init="x = 0">
+            Draw Number
+        </button>
+        <p>Number is: {{ x }}</p>
+    </div>
+
+    <div some-directive>
+        <div>some stuff here</div>
+    </div>
+
+    <br/>
+    <h1>------------ scope参数------------------</h1>
+    <!--
+        作用域的继承机制是向下而非向上进行的
+    -->
+    <div ng-app="myApp"
+         ng-init="someProperty = 'some data'">
+        <div ng-init="siblingProperty='moredata'">
+            Inside Div Two: {{ aThirdProperty }}
+            <div ng-init="aThirdProperty = 'data for 3rd property'"
+                 ng-controller="nestedController">
+                Inside Div Three: {{ aThirdProperty }}
+                <div ng-init="aThirdProperty = 'data for 4rd property'" ng-controller="SecondController">
+                    Inside Div Four: {{ aThirdProperty }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-controller="MyCtrl">
+        {{gameName}}
+    </div>
+
+
+    <div ng-init="myProperty='wow,thisiscool'">
+        Surrounding scope: {{ myProperty }} + "11111"
+        <div my-inherit-scope-directive>2222</div>
+        <div my-directive>3333</div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

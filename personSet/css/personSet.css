@@ -1,0 +1,152 @@
+
+.person_left_panel_image {
+    position: relative;
+    margin-top: 5px;
+    margin-left: 20px;
+    overflow: hidden;
+    color: #0062b7;
+}
+
+.person_left_panel {
+    margin: 0px;
+    padding: 0px;
+    height:700px;
+    /*width: 12%;*/
+    width: 160px;
+    position: fixed;
+    top:80px;
+    background-color: lightgrey;
+    border: 1px solid #f5f5f5;
+    overflow: hidden;
+
+    /*new add*/
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+
+}
+
+.person_right_panel {
+    margin: 0px;
+    padding: 0px;
+    top:53px;
+    background-color:#ffffff;
+    left: 150px;
+    overflow-y: scroll;
+    height: 520px;
+
+
+    /*mew add*/
+    position: relative;
+    width: 89%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.personset_title {
+    position: fixed;
+    top:80px;
+    background-color: #f5f5f5;
+    width: 100%;
+
+    /*new add*/
+    height: 60px;
+}
+
+.personset_title .set_operateItem {
+    float: right;
+    position: absolute;
+    right: 180px;
+    top:10px;
+}
+
+
+.log_page {
+    left: 150px;
+    width: 100%;
+    height: 55px;
+    background-color:#f5f5f5;
+    position: fixed;
+    bottom: 0px;
+}
+
+.log_page > nav > ul > li > button {
+     color: #777;
+     cursor: pointer;
+     background-color: #fff;
+
+ }
+
+.log_page > nav > ul > li > button:disabled {
+    cursor: pointer;
+    background-color: #eeeeee;
+}
+
+.log_page > nav > ul > li >button:hover,
+.log_page > nav > ul > li >button:focus{
+    color: #777;
+    cursor: pointer;
+    background-color: #eeeeee;
+}
+
+
+#log_query_title {
+    position: relative;
+    top: -8px;
+    width: 100px;
+    font-family: bold;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+.userInfo {
+    position: relative;
+}
+
+.userInfo > label {
+    position: absolute;
+    margin-left:10px;
+    margin-top: 10px;
+}
+
+.personSet_tab {
+    position: absolute;
+    margin-top: 150px;
+}
+
+.currentUser {
+    position: absolute;
+    margin-left:55px;
+    margin-top: 10px;
+}
+
+
+.loginTime {
+    position: absolute;
+    margin-left:5px;
+    margin-top: 40px;
+}
+
+.loginAddress {
+    position: absolute;
+    margin-left:5px;
+    margin-top: 80px;
+}
+
+.userLoginTimeRecent{
+    position: absolute;
+    margin-left:15px;
+    margin-top: 60px;
+}
+
+.userLoginIpRecent{
+    position: absolute;
+    margin-left:25px;
+    margin-top: 100px;
+}
+
+.userImage:hover {
+    opacity: 0.5;
+}
+

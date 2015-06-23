@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html ng-app="animateModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../../frameWork/bootstrap/3.3.4/css/bootstrap-theme.css"/>
+    <link rel="stylesheet" href="../../frameWork/bootstrap/3.3.4/css/bootstrap.css"/>
+
+    <script type="text/javascript" src="../../frameWork/angular/1.3.10/angular.js"></script>
+    <script type="text/javascript" src="../../frameWork/angular/1.3.10/angular-animate.js"></script>
+    <script type="text/javascript" src="./animate.js"></script>
+
+    <style>
+        /************************************/
+        /*使用css3过渡*/
+        .fade-in1 {
+            transition:  4s linear all;
+            -webkit-transition:  4s linear all;
+        }
+
+        /*.fade-in1:hover {
+            width: 400px;
+            height: 400px;
+        }*/
+
+       .fade-in1 .ng-mouseenter {
+            opacity: 0;
+        }
+
+        .fade-in1 .ng-mouseleave {
+            opacity: 1;
+        }
+
+
+        /*************************************/
+        /*使用css3动画*/
+        @keyframes firstAnimation2 {
+            0% {
+                color: blue;
+            }
+            100% {
+                color: red;
+            }
+        }
+
+
+        @-webkit-keyframes firstAnimation {
+            /* from等于0% */
+            from {
+                color: yellow;
+            }
+            /* from等于100% */
+            to {
+                color: black;
+            }
+        }
+
+        .fade-in:hover {
+            -webkit-animation: 6s firstAnimation;
+            /*animation: 7s firstAnimation;*/
+        }
+    </style>
+</head>
+<body ng-controller="animateCtrl">
+    <div class="fade-in" style="border:1px solid blue;width: 100px;">
+        使用css3动画
+    </div>
+    <div class="fade-in1" ng-mouseenter="showData()" style="border:1px solid blue;width: 100px;background-color: #00B83F">
+        使用css3过渡
+    </div>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

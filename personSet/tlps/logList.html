@@ -1,0 +1,30 @@
+<div class="panel-body">
+    <table class="table">
+        <thead>
+        <th>序号</th>
+        <th>用户ID</th>
+        <th>用户IP</th>
+        <th>操作时间</th>
+        <th>操作类型</th>
+        <th>操作内容</th>
+        </thead>
+        <tr ng-repeat="log in operateLogs| startFrom:currentPage*pageSize | limitTo:pageSize">
+            <th>{{log.COUNTROWS}}</th>
+            <th>{{log.USERID}}</th>
+            <th>{{log.USERIP}}</th>
+            <th>{{log.USEDATE}}</th>
+            <th>{{log.OPERATETYPE | transOperateType}}</th>
+            <th>{{log.OPERATECONTENT}}</th>
+        </tr>
+    </table>
+</div>
+<div class="log_page">
+    <nav>
+        <ul class="pager">
+            <li><button ng-disabled="currentPage == 0" class="img-rounded" ng-click="currentPage=currentPage-1">上一页</button></li>
+            <span ng-bind="currentPage+1" id="pagerPrevious">1</span>/<span ng-bind="numberOfPages()">Loading..</span>
+            <li><button class="img-rounded" ng-disabled="currentPage >= operateLogs.length/pageSize - 1"
+                        ng-click="currentPage=currentPage+1">下一页</button></li>
+        </ul>
+    </nav>
+</div>

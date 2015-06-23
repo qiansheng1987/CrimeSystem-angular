@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>对象创建模式</title>
+    <script src="js/jquery/jquery-1.11.2.js"></script>
+    <script src="js/angular/1.3.10/angular.js"></script>
+    <script>
+        //////////////命名空间模式/////////////////
+        //命名空间有助于减少程序中所需要的全局变量的数量，并且同时还有助于避免命名冲突或过长的名字前缀
+        //var myApp  = {}//不安全
+        /*if (typeof myApp === "undifined") {
+            var myApp = {};
+        }*/
+        //或者采用
+        //var myApp = myApp || {};
+
+        //通用的命名空间函数
+        var myApp = myApp || {};
+        myApp.namespace = function (ns_string) {
+            var parts = ns_string.split("."),
+                    parent = myApp,
+                    i;
+            //剥离前面多余的全局变量
+            if (parts[0] == "myApp") {
+                parts = parts.slice(1);
+            }
+
+            for (var i=0; i<parts.length; i+=1) {
+                //如果它不存在，就创建一个属性
+                if (typeof parent[parts[i]] === "undefined") {
+                    parent[parts[i]] = {};
+                    parent = parent[parts[i]];
+                }
+
+            }
+            return parent;
+        }
+
+        function show1() {
+            var module = myApp.namespace("myApp.founder.cn");
+            alert(module == myApp.founder.cn);
+        }
+
+        /////////////////函数私有属性和方法////////////////////////////////
+        /**
+         * javascript并没有特殊的语法来表示私有，保护，或者公共属性和方法
+         * javasript中所有对象的成员都是公共的。
+         */
+        var obj = {
+            prop: 1,
+            getProp: function () {
+                return this.prop;
+            }
+        };
+        //console.log(obj.prop); //prop是公共可访问的
+        //console.log(obj.getProp()); //getProp()也是共有可访问的
+        //当让使用构造函数创建对像也同样如此。
+        function obj1() {
+            this.prop = 1;
+            this.getProp = function () {
+                return this.prop;
+            }
+        }
+        var prop = new obj1();
+        //console.log(prop.name);
+        //console.log(prop.getProp);
+
+
+        //javascript中私有成员的实现
+        //1)构造函数创建的对象中私有成员的显示方式
+        function Person() {
+            //私有成员
+            var name = "qiansheng";
+            //公共函数（也叫特权方法：可以访问私有成员的方法）
+            this.getName = function () {
+                return name;
+            };
+        }
+
+        function show2() {
+            var p = new Person();
+            alert("person.name:" + p.name); //输出undifined
+            alert("person.name:" + p.getName()); //输出qiansheng
+        }
+
+        //2)利用对象字面量创建的对象中私有成员的显示方式
+        var privateObj = ((function () {
+            //私有成员
+            var name = "This is Private members";
+
+            //公共方法
+            return {
+                getName: function() {
+                    return name;
+                }
+            }
+        })());
+        function show3() {
+            alert("privateObj.name:" +  privateObj.name); //输出undifined
+            alert("privateObj.getName:" + privateObj.getName()); //输出qiansheng
+        }
+
+
+        //////////////模块模式/////////////////
+        //通用模块模式的实例
+        myApp.namespace("myapp.util.array"); //利用上面定义的命名空间模式
+        myapp.util.array = (function () {
+            //依赖
+            var uobj = myapp.util.object,
+                    ulang = myapp.util.lang,
+
+                    //私有属性
+                   array_string = "[array]";
+
+                    //私有方法
+                    //todo...
+            //可选的一次行初始化过程
+            //todo....
+
+            //共有API
+            return {
+                isArray: function () {
+                    //todo .....
+                }
+            }
+
+        }());
+
+
+
+        //////////////沙箱模式/////////////////
+        /**
+         * 沙箱模式解决了命名空间模式的如下几个缺点：
+         * 1）对于当个全局变量的依赖变成了对应用程序的全局变量的依赖，在命名空间模式中，
+         *  是没有方法使同一个应用程序或者库的两个版本运行在同一个页面中，因为这两个都需要
+         *  同一个全局符号，比如全局变量myApp。
+         *
+         * 2）对这种以点分割的名字来说，需要输入更长的字符，并且在运行时需要解析更长
+         * 的时间，比如myapp.util.array.
+         *
+         * 沙箱模式提供了一个可用于模块运行的环境，且不会对其他模块和惹人沙箱造成任何影响。
+         */
+
+        /*在命名空间模式中，有一个全局对象，在沙箱模式张则事一个全局构造函数，让我们称之为
+        Sandbox(),可以使用该构造函数创建对象并且还可以传递回调函数，它变成一个代码的
+        隔离沙箱运行环境。
+        使用沙箱的方法如下：
+            new Sandbox(function(box){
+                //code
+            });
+
+            可以忽略new操作符
+            Sandbox(["ajax", "event", function(box){
+                //code
+            }]);
+
+            Sandbox("ajax", "event", function(box){
+                //code
+            });
+
+            其中box与命名空间列子中的myapp是相似的，他有你所需要的所有库函数。
+            能够使代码能够正常的运行。
+        */
+
+        //通用模块的实现方式
+
+        //增加模块
+        Sanbox.modules = {};
+        Sanbox.modules.dom = function (box) {
+            //code
+        }
+        Sanbox.modules.event = function (box) {
+            //code
+        }
+        Sanbox.modules.ajax = function (box) {
+            //code
+        }
+        //实现构造函数
+        function Sandbox() {
+            //将参数转换为一个数组
+            var args = Array.prototype.slice.call(arguments),
+                //最后一个参数是回调函数
+                callback = args.pop(),
+                //模块可以作为一个数组传递，或者作为单独的参数传递
+                modules = (args[0] && typeof args[0] === "string") ? args : args[0],
+                i;
+
+            //确保该函数作为构造函数被调用
+            if (!(this instanceof Sandbox)) {
+                return new Sandbox(modules, callback);
+            }
+
+            //需要向this添加的属性
+            this.a = 1;
+            this.b = 2;
+            //现在向该核心的this对象添加模块，不指定模块或者指定“*”都表示使用所有模块
+            if (!modules || modules === "*") {
+                modules = [];
+                for (i in Sandbox.modules) {
+                    if (Sandbox.modules.hasOwnProperty(i)) {
+                        modules.push(i);
+                    }
+                }
+            }
+
+            //初始化所需的模块
+            for (i = 0; i< modules.length; i += 1) {
+                Sandbox.modules[modules[i]](this);
+            }
+
+            //call the callback
+            callback(this);
+        }
+
+        //需要的任何原型属性
+        Sandbox.prototype = {
+            name: "this is a sanbox",
+            getName: function () {
+                return this.name;
+            }
+        }
+
+
+        //////////////静态成员/////////////////
+        /**
+         * 在javascript中没有特殊的语法来表示静态成员，但是可以通过使用构造函数并且向其
+         * 添加属性这种方法，从而获得与“类式”(classy,即具有class性质)语言相同的语法
+         */
+        //1)共有的静态成员
+        //构造函数
+        var Book = function () {
+
+        };
+        //静态方法
+        Book.getName = function () {
+            return "javascript";
+        }
+        //向该原型添加一个普通的方法
+        Book.prototype.setPrice = function (price) {
+            this.price = price;
+        }
+
+        function show4() {
+            console.log(Book.getName());
+            var book = new Book();
+            book.setPrice(400);
+
+            //如果试图以一个静态方式调用一个实例方法是无法正常进行的
+            //同样，用实例对象调用静态方法也是无法进行的
+            //如下：
+            typeof Book.setPrice(200) ;//输出“undefined”
+            typeof book.getName(); //输出“undifined”
+        }
+
+
+
+    </script>
+</head>
+<body>
+<button onclick="show4();">测试</button>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

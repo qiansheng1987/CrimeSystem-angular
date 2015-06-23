@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+	<display-name>CrimeSystem</display-name>
+	<servlet>
+		<servlet-name>Proxy</servlet-name>
+		<servlet-class>com.easymap.ezserver.proxy6.ProxyServlet</servlet-class>
+		<init-param>
+			<param-name>Debug</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>LogEncoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</servlet>
+	<servlet>
+		<servlet-name>CrossDomainProxy</servlet-name>
+		<servlet-class>com.founder.dataCenter.crimeSys.crossProxy.CrossDomainProxy</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Proxy</servlet-name>
+		<url-pattern>/Proxy</url-pattern>
+	</servlet-mapping> 
+	<servlet-mapping>
+		<servlet-name>CrossDomainProxy</servlet-name>
+		<url-pattern>/CrossDomainProxy</url-pattern>
+	</servlet-mapping>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+</web-app>

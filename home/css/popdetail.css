@@ -1,0 +1,22 @@
+.detail-item{
+    float: left;
+}
+
+.detail-item-label{
+    width: 80px;
+}
+
+.detail-item-value{
+    width: 300px;
+}
+
+.pop-body{
+    max-height: 400px;
+}
+.pop-body .detail-item-value{
+    text-align: left;
+}
+
+
+
+
